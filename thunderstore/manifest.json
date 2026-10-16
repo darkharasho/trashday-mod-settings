@@ -1,0 +1,9 @@
+{
+    "name": "ModSettings",
+    "version_number": "0.1.0",
+    "website_url": "https://github.com/darkharasho/trashday-mod-settings",
+    "description": "In-game settings for every Trash Day mod: a Mods tab in Options (or press F10) with toggles, sliders, choices, text and key rebinding. No config file editing.",
+    "dependencies": [
+        "BepInEx-BepInExPack-5.4.2305"
+    ]
+}
