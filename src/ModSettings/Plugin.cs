@@ -40,7 +40,15 @@ namespace ModSettings
                 return;
             }
 
-            Log.LogInfo($"{PluginName} {PluginVersion} loaded");
+            OptionsAccess.Init();
+
+            // Its own object, so it outlives scene loads and doesn't depend on BepInEx's manager object staying alive.
+            var host = new GameObject("ModSettings");
+            DontDestroyOnLoad(host);
+            host.hideFlags = HideFlags.HideAndDontSave;
+            host.AddComponent<HotkeyController>();
+
+            Log.LogInfo($"{PluginName} {PluginVersion} loaded; press {OpenKey.Value} for the Mods tab");
         }
 
         private void OnDestroy() => _harmony?.UnpatchSelf();
