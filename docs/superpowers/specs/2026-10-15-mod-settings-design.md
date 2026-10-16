@@ -47,7 +47,7 @@ Done means: More Players' lobby cap and the Admin Menu's hotkey can be changed i
   - It's found by name (`ModsTab`) inside `OptionsPanel`'s `content-area`.
   - If it's missing, it's created as a sibling of `AudioTab`, copying that element's class list. So the patch is idempotent across reopenings.
 - **Tab button:**
-  - It's found by name (`ModsTabBtn`), or created next to `AudioTabBtn` by copying that button's container class list and its own.
+  - It's found by name (`ModsTabBtn`), or created after `KeybindsTabBtn` (last, matching its place in the cycle order) by copying that button's container class list and its own.
   - The label is "Mods".
   - Click and focus behave like the game's own tabs: a click calls `ClickTab`, and focusing it shows the tab.
 - **Registering the tab:**
@@ -105,10 +105,10 @@ Done means: More Players' lobby cap and the Admin Menu's hotkey can be changed i
 
 ### Saving
 
-- `SaveOnConfigSet` is turned off on each touched `ConfigFile` while the tab is in use. Then:
-  - Dirty files are saved once a second.
+- Each write turns `SaveOnConfigSet` off for just that write, then restores it. A file whose `SaveOnConfigSet` was on is marked dirty. Then:
+  - Dirty files are saved within a second of the first change.
   - They're saved again when the Options screen is disabled.
-  - Each file's previous `SaveOnConfigSet` value is then restored.
+  - Files whose mod turned `SaveOnConfigSet` off are never saved by this mod; that mod saves on its own terms.
 - **Save failures:** a failed save is logged, and the file is retried on the next tick.
 
 ### F10 hotkey
@@ -124,7 +124,8 @@ Done means: More Players' lobby cap and the Admin Menu's hotkey can be changed i
   - `MenuSceneManager.MenusSuppressed` (the developer console or the Admin Menu)
   - no `MainMenuUI` or `MidgameUI` is found
   - a menu other than the pause menu or Options is open (for example a results screen or a modal)
-- **Back:** pressing Back returns to wherever the game was. That's gameplay when F10 was pressed in play, since the scene is pushed onto the pause menu's stack without the pause menu itself; manual verification checks this.
+- **Back:** the game's stack adds its default scene under any scene pushed onto an empty stack (`MenuSceneStack.AutoActivateDefaultScene`). So Back from an F10-opened Options screen goes to the pause menu in a run, and to the title screen on the title screen.
+- **Starting focus:** before pushing, the hotkey points the Options scene's `MenuScene.DefaultFocusElementName` at `ModsTabBtn`, and restores the original name when Options closes. Otherwise the scene's deferred default focus would land on the Gameplay tab button and switch back to Gameplay.
 
 ### Error handling
 
@@ -170,7 +171,7 @@ Done means: More Players' lobby cap and the Admin Menu's hotkey can be changed i
   - Reset Defaults, with its confirmation, on the selected mod
   - changing More Players' max players with the slider
   - rebinding the Admin Menu key, with Esc cancelling and not closing Options
-  - F10 from gameplay, title and pause, and Back from an F10-opened screen
+  - F10 from gameplay, title and pause, and Back from an F10-opened screen (to the pause menu or title)
   - F10 ignored while the Admin Menu is open
   - after a restart, changes persisted
 
