@@ -151,10 +151,17 @@ namespace ModSettings
             var scroll = new ScrollView(ScrollViewMode.Vertical);
             scroll.horizontalScrollerVisibility = ScrollerVisibility.Hidden;
             scroll.style.flexGrow = 1f;
+            // The scrollers' sliders are focusable fields; left so, they'd be the tab's "last focusable" for the
+            // game's Up/Down navigation. The view is still empty here, so everything inside it is scroller parts.
+            foreach (var part in scroll.Query<VisualElement>().ToList())
+            {
+                if (part != scroll && part != scroll.contentContainer)
+                    part.focusable = false;
+            }
             // Keep the focused row on screen when moving with a controller or the keyboard.
             scroll.RegisterCallback<FocusInEvent>(e =>
             {
-                if (e.target is VisualElement target && target != scroll)
+                if (e.target is VisualElement target && target != scroll && scroll.contentContainer.Contains(target))
                     scroll.ScrollTo(target);
             }, TrickleDown.TrickleDown);
             content.Add(scroll);

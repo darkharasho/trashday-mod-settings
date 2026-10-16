@@ -17,8 +17,8 @@ namespace ModSettings
             var entry = setting.Entry;
             var type = entry.SettingType;
             var acceptable = entry.Description?.AcceptableValues;
-            var row = Rows.Row(parent, setting.Name, setting.Description);
-            var restart = setting.RestartRequired ? Rows.Note(row, "restart needed") : null;
+            var row = Rows.Row(setting.Name, setting.Description);
+            Label restart = null;
 
             Func<object, bool> set = value =>
             {
@@ -95,16 +95,20 @@ namespace ModSettings
                     break;
             }
 
+            if (setting.RestartRequired)
+                restart = Rows.Note(row, "restart needed");
             if (setting.ReadOnly)
                 row.SetEnabled(false);
+            parent.Add(row);
             return refresh;
         }
 
         /// <summary>A failed row: the setting's name and "can't edit here".</summary>
         public static void BuildBroken(VisualElement parent, SettingInfo setting)
         {
-            var row = Rows.Row(parent, setting.Name, setting.Description);
+            var row = Rows.Row(setting.Name, setting.Description);
             Rows.ReadOnly(row, () => "can't edit here", out _);
+            parent.Add(row);
         }
 
         private static List<object> ListValues(AcceptableValueBase acceptable)

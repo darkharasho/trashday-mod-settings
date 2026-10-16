@@ -8,6 +8,9 @@ Deploy the build (More Players and Admin Menu installed too). Tick each line.
 - [ ] Shoulder buttons / tab-cycle keys cycle Gameplay → … → Keybinds → Mods → Gameplay.
 - [ ] Controller/arrow keys: down from the Mods tab button reaches the Mod picker; down from the last row reaches Reset Defaults; up from the picker returns to the tab button.
 - [ ] Pause menu → Options shows the same Mods tab.
+- [ ] On a controller (or arrow keys), the focused Mods row highlights like the game's own rows.
+- [ ] Left/Right on the Mod picker steps through mods and focus stays on the picker (it doesn't jump to another row or tab).
+- [ ] With a mod that has enough settings to scroll: Up from Reset Defaults lands on the last row (not a scrollbar) and the list scrolls to it; Down through the rows keeps the focused row on screen.
 
 ## Contents
 - [ ] The Mod picker lists Admin Menu, Mod Settings and More Players; ◀ ▶ (left/right or click) wraps around.
@@ -22,7 +25,7 @@ Deploy the build (More Players and Admin Menu installed too). Tick each line.
 
 ## F10
 - [ ] Title screen: F10 opens Options on the Mods tab. Back returns to the title screen.
-- [ ] In a run (pause menu closed): F10 opens Options on Mods; Back goes to the pause menu; Esc/Resume back to play.
+- [ ] In a run (pause menu closed): F10 opens Options on Mods; Back goes to the pause menu or straight back to play (note which; the spec and CLAUDE.md say pause menu).
 - [ ] With the pause menu open: F10 opens Options on Mods.
 - [ ] With Options open on Gameplay: F10 switches to Mods.
 - [ ] With the Reset Defaults confirmation open: F10 does nothing.

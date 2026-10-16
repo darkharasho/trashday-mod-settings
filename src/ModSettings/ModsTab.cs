@@ -77,9 +77,10 @@ namespace ModSettings
             _selected = _mods[index];
             _rememberedGuid = _selected.Guid;
 
-            var pickerRow = Rows.Row(_container, "Mod", null);
+            var pickerRow = Rows.Row("Mod", null);
             var mod = _selected;
             _picker = Rows.Cycle(pickerRow, () => $"{mod.Name}  {mod.Version}", () => Select(index + 1), () => Select(index - 1), out _);
+            _container.Add(pickerRow);
 
             foreach (var group in SettingOrder.Group(_selected.Settings, s => s.Facts))
             {

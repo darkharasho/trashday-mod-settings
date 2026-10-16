@@ -12,7 +12,11 @@ namespace ModSettings
     /// </summary>
     internal static class Rows
     {
-        public static SettingRow Row(VisualElement parent, string label, string description)
+        /// <summary>
+        /// The row and its labels, not yet attached: add it to its parent only after its control, because
+        /// SettingRow wires its focus highlight to the focusable children it has when it attaches to the panel.
+        /// </summary>
+        public static SettingRow Row(string label, string description)
         {
             var row = new SettingRow();
             var labels = new VisualElement();
@@ -39,7 +43,6 @@ namespace ModSettings
                 labels.Add(note);
             }
             row.Add(labels);
-            parent.Add(row);
             return row;
         }
 
@@ -61,13 +64,15 @@ namespace ModSettings
             {
                 if (evt.direction != NavigationMoveEvent.Direction.Left && evt.direction != NavigationMoveEvent.Direction.Right)
                     return;
+                // Taken before stepping: the Mod picker re-renders on step, detaching this button from its panel.
+                var focus = button.panel?.focusController;
                 if (evt.direction == NavigationMoveEvent.Direction.Left)
                     previous();
                 else
                     next();
                 update();
                 evt.StopPropagation();
-                button.panel?.focusController?.IgnoreEvent(evt);
+                focus?.IgnoreEvent(evt);
             });
             control.Add(button);
             row.Add(control);
