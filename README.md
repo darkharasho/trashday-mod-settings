@@ -1,6 +1,6 @@
 # trashday-mod-settings
 
-One in-game settings screen for every BepInEx mod in Trash Day: a **Mods** tab in the game's Options screen, and F10 to jump straight to it. Packaged for Thunderstore as `darkharasho-ModSettings`; the store page is `thunderstore/README.md`.
+One in-game settings screen for every BepInEx mod in Trash Day: a **Mods** tab in the game's Options screen, and F10 to jump straight to it. Packaged for Thunderstore as `darkharasho-TrashDayModSettings`; the store page is `thunderstore/README.md`.
 
 ## How it works
 
@@ -13,7 +13,7 @@ One in-game settings screen for every BepInEx mod in Trash Day: a **Mods** tab i
 
 - `dotnet test tests/ModSettings.Tests/ModSettings.Tests.csproj` runs the unit tests (pure logic only).
 - `dotnet build src/ModSettings/ModSettings.csproj` builds and copies the DLL into the game's `BepInEx/plugins/darkharasho-ModSettings`.
-- `scripts/package.sh` builds Release and writes `dist/darkharasho-ModSettings-<version>.zip`; it fails if the manifest, `Plugin.cs`, csproj and `CHANGELOG.md` versions disagree.
+- `scripts/package.sh` builds Release and writes `dist/darkharasho-TrashDayModSettings-<version>.zip`; it fails if the manifest, `Plugin.cs`, csproj and `CHANGELOG.md` versions disagree.
 - CI builds against `lib/refs` (from `scripts/update-refs.sh`); pass `-p:UseRefs=true` to try that locally.
 
 ### Releases

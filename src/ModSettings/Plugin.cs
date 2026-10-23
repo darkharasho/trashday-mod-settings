@@ -12,7 +12,7 @@ namespace ModSettings
     {
         public const string PluginGuid = "com.darkharasho.trashday.modsettings";
         public const string PluginName = "ModSettings";
-        public const string PluginVersion = "0.1.0";
+        public const string PluginVersion = "0.1.1";
 
         internal static ManualLogSource Log;
         internal static ConfigEntry<KeyboardShortcut> OpenKey;

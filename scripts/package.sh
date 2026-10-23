@@ -32,7 +32,7 @@ if errors:
 print(v)
 PY
 )"
-zipfile="$root/dist/darkharasho-ModSettings-$version.zip"
+zipfile="$root/dist/darkharasho-TrashDayModSettings-$version.zip"
 
 dotnet build "$root/src/ModSettings/ModSettings.csproj" -c Release
 
