@@ -12,7 +12,7 @@ One in-game settings screen for every BepInEx mod in Trash Day: a **Mods** tab i
 ## Development
 
 - `dotnet test tests/ModSettings.Tests/ModSettings.Tests.csproj` runs the unit tests (pure logic only).
-- `dotnet build src/ModSettings/ModSettings.csproj` builds and copies the DLL into the game's `BepInEx/plugins/darkharasho-ModSettings`.
+- `dotnet build src/ModSettings/ModSettings.csproj` builds and copies the DLL into the game's `BepInEx/plugins/darkharasho-TrashDayModSettings`.
 - `scripts/package.sh` builds Release and writes `dist/darkharasho-TrashDayModSettings-<version>.zip`; it fails if the manifest, `Plugin.cs`, csproj and `CHANGELOG.md` versions disagree.
 - CI builds against `lib/refs` (from `scripts/update-refs.sh`); pass `-p:UseRefs=true` to try that locally.
 
