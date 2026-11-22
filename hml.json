@@ -1,0 +1,19 @@
+{
+  "$schema": "https://hml-share.project96.workers.dev/v1/catalog/schema.json",
+  "schema": 1,
+  "mods": [
+    {
+      "id": "mod-settings",
+      "name": "TrashDayModSettings",
+      "description": "In-game settings for every Trash Day mod: a Mods tab in Options (or press F10) with toggles, sliders, choices, text and key rebinding. No config file editing.",
+      "games": [
+        "trash-day"
+      ],
+      "icon": "thunderstore/icon.png",
+      "readme": "thunderstore/README.md",
+      "dependencies": [
+        "BepInEx-BepInExPack-5.4.2305"
+      ]
+    }
+  ]
+}
